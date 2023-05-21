@@ -4,7 +4,6 @@
 	import L from "leaflet";
 	import type { MarkerLayer, MarkerSpec } from "../services/markers";
 	import { markerSelected } from "../stores";
-    import type { Category } from "../services/placemark-types";
 
 	export let id = "home-map-id";
 	export let height = 80;
@@ -16,7 +15,6 @@
 	export let marker: MarkerSpec = {
 		id: "",
 		name: "",
-        category: "",
 		location: new LatLng(0, 0)
 	};
 
