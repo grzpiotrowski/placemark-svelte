@@ -1,6 +1,17 @@
 <script lang="ts">
 	import type { Poi } from "../../services/placemark-types";
+  import { placemarkService } from "./../../services/placemark-service";
 	export let pois: Poi[] = [];
+  
+  async function deletePoi(id: string) {
+    try {
+      await placemarkService.deletePoi(id);
+      pois = pois.filter(poi => poi._id !== id);
+    } catch (error) {
+      console.log("Error trying to delete POI: " + id);
+    }
+  }
+  
 </script>
 
 {#each pois as poi}
@@ -29,9 +40,9 @@
     <a href={`/poi/${poi._id}`} class="button is-medium is-fullwidth">
       <i class="fas fa-folder-open"></i>
     </a>
-    <a href={`/dashboard/deletepoi/${poi._id}`} class="button is-medium is-fullwidth">
+    <button class="button is-medium is-fullwidth" on:click={() => deletePoi(poi._id)}>
       <i class="fas fa-trash-alt" style="color:red"></i>
-    </a>
+    </button>
   </footer>
 </div>
 <br>

@@ -83,4 +83,13 @@ export const placemarkService = {
 		}
 	},
 
+	async deletePoi(id: string): Promise<void> {
+		try {
+			await axios.delete(`${this.baseUrl}/api/pois/${id}`);
+		} catch (error) {
+			console.error(`Error deleting POI with id ${id}`, error);
+			return;
+		}
+	},
+	
 };
