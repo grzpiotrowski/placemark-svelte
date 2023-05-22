@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-ignore
 	import Chart from "svelte-frappe-charts";
 	import Header from "$lib/Header.svelte";
 	import MainNavigator from "$lib/MainNavigator.svelte";

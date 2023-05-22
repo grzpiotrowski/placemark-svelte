@@ -1,14 +1,20 @@
 <script lang="ts">
 	import Header from "$lib/Header.svelte";
 	import MainNavigator from "$lib/MainNavigator.svelte";
-	import LeafletMap from "$lib/LeafletMap.svelte";
 	import type { PageData } from "./$types";
 	export let data: PageData;
-	export const ssr = false;
 </script>
 
 <Header>
 	<MainNavigator />
 </Header>
 
-<LeafletMap markerLayers={[data.poiMarkerLayer]} />
+<div class="columns">
+	<div class="column box has-text-centered">
+		<ul>
+			{#each data.pois as poi (poi._id)}
+				<li>{poi.name}</li>
+			{/each}
+		</ul>
+	</div>
+</div>
