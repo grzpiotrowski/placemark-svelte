@@ -1,0 +1,42 @@
+<script lang="ts">
+    import Header from "$lib/Header.svelte";
+	import MainNavigator from "$lib/MainNavigator.svelte";
+    import type { Poi, Category} from "../../../services/placemark-types"
+    export let categories: Category[];
+    import type { PageData } from "./$types";
+	export let data: PageData;
+
+    const { poi } = data;
+</script>
+
+<Header>
+	<MainNavigator />
+</Header>
+  
+  <section class="section">
+    <div class="title">
+      {poi.name}
+    </div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Category:</td>
+          <td>{poi.category.name}</td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td>{poi.description}</td>
+        </tr>
+        <tr>
+          <td>Latitude:</td>
+          <td>{poi.latitude}</td>
+        </tr>
+        <tr>
+          <td>Longitude:</td>
+          <td>{poi.longitude}</td>
+        </tr>
+      </tbody>
+    </table>
+    <a class="button" href={`/poi/edit/${poi._id}`}> Edit POI </a>
+  </section>
+  

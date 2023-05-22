@@ -74,6 +74,17 @@ export const placemarkService = {
 		}
 	},
 
+	async getPoiById(id: string): Promise<Poi> {
+		try {
+			const response = await axios.get(this.baseUrl + "/api/pois/" + id);
+			console.log(response);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+			throw error;
+		}
+	},
+
 	async getPoisByUser(userId: string): Promise<Poi[]> {
 		try {
 			const response = await axios.get(this.baseUrl + "/api/users/" + userId + "/pois");
