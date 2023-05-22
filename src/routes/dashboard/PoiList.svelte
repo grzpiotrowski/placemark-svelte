@@ -28,7 +28,11 @@
   </header>
   <div class="card-image">
     <figure class="image is-3by1">
-      <img src="images/poi-placeholder.jpg" alt="Placeholder Image">
+      {#if poi.img}
+        <img src="{poi.img}" alt="POI Image">
+      {:else}
+        <img src="images/poi-placeholder.jpg" alt="Placeholder Image">
+      {/if}
     </figure>
   </div>
   <div class="card-content">
