@@ -25,3 +25,8 @@ export interface Poi {
     longitude: number;
 	_id: string;
 }
+
+export interface ChartData {
+	labels: string[];
+	datasets: [{ values: number[] }];
+}
