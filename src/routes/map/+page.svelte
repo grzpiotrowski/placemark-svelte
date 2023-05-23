@@ -11,4 +11,4 @@
 	<MainNavigator />
 </Header>
 
-<LeafletMap markerLayers={[data.poiMarkerLayer]} />
+<LeafletMap markerLayers={data.poiMarkerLayers} />

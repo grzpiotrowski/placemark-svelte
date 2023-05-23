@@ -1,4 +1,4 @@
-import { getMarkerLayer } from "../../services/placemark-utils";
+import { getMarkerLayers } from "../../services/placemark-utils";
 import { placemarkService } from "./../../services/placemark-service";
 import { loggedInUser } from "../../stores";
 export const ssr = false;
@@ -10,6 +10,6 @@ export const load = async ({ params }) => {
 	const allLoggedInUserPois = await placemarkService.getPoisByUser(user._id);
 	return {
 		pois: allLoggedInUserPois,
-		poiMarkerLayer: getMarkerLayer(allLoggedInUserPois)
+		poiMarkerLayers: getMarkerLayers(allLoggedInUserPois)
 	};
 };
