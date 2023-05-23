@@ -1,20 +1,22 @@
 <script lang="ts">
     import Header from "$lib/Header.svelte";
 	import MainNavigator from "$lib/MainNavigator.svelte";
-    import type { Poi, Category} from "../../../services/placemark-types"
-    export let categories: Category[];
+    import type { Poi, Category } from "../../../services/placemark-types"
     import { placemarkService } from "../../../services/placemark-service";
     import type { PageData } from "./$types";
 	export let data: PageData;
 
-    const { poi } = data;
+    const poi = data.poi;
+    const categories = data.categories;
 
     let isEditing = false;
 
     async function saveData() {
+        const selectedCategory = categories.find(c => c.name === poi.category.name);
         const poiData = {
             name: poi.name,
             description: poi.description,
+            category: selectedCategory ? selectedCategory._id : undefined,
             latitude: poi.latitude,
             longitude: poi.longitude
 		};
@@ -44,7 +46,13 @@
 			<tbody>
 				<tr>
 					<td>Category:</td>
-					<td><input type="text" bind:value={poi.category.name} /></td>
+                    <td>
+                        <select bind:value={poi.category.name}>
+                            {#each categories as category}
+                                <option>{category.name}</option>
+                            {/each}
+                        </select>
+                    </td>
 				</tr>
 				<tr>
 					<td>Description:</td>
@@ -52,11 +60,11 @@
 				</tr>
 				<tr>
 					<td>Latitude:</td>
-					<td><input type="text" bind:value={poi.latitude} /></td>
+					<td><input type="number" bind:value={poi.latitude} /></td>
 				</tr>
 				<tr>
 					<td>Longitude:</td>
-					<td><input type="text" bind:value={poi.longitude} /></td>
+					<td><input type="number" bind:value={poi.longitude} /></td>
 				</tr>
 			</tbody>
 		</table>

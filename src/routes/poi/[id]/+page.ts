@@ -6,10 +6,8 @@ export const load = async ({ params }) => {
   placemarkService.checkPageRefresh();
   const user = get(loggedInUser);
   const poi = await placemarkService.getPoiById(encodeURI(params.id));
-  console.log(poi);
-  //const categories = await placemarkService.getAllCategories();
-  
   return {
     poi: poi,
+    categories: await placemarkService.getAllCategories()
   };
 };

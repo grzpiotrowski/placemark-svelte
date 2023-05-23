@@ -1,6 +1,6 @@
 import axios from "axios";
 import { loggedInUser } from "../stores";
-import type { Poi } from "./placemark-types";
+import type { Poi, Category } from "./placemark-types";
 
 export const placemarkService = {
 	baseUrl: "http://localhost:3000",
@@ -62,6 +62,15 @@ export const placemarkService = {
 				});
 				axios.defaults.headers.common["Authorization"] = "Bearer " + savedUser.token;
 			}
+		}
+	},
+
+	async getAllCategories(): Promise<Category[]> {
+		try {
+			const response = await axios.get(this.baseUrl + "/api/categories");
+			return response.data;
+		} catch (error) {
+			return [];
 		}
 	},
 
