@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Coordinates from "$lib/Coordinates.svelte";
 	import { placemarkService } from "../../services/placemark-service";
-    import type { Category, LoggedInUser } from "../../services/placemark-types";
+    import type { Category } from "../../services/placemark-types";
 	import { loggedInUser } from "../../stores";
 	export let categories: Category[] = [];
     import { get } from "svelte/store";

@@ -16,7 +16,7 @@
 
 <div class="columns">
 	<div class="column box has-text-centered">
-        <PoiForm {categories}/>
-        <PoiList {pois}/>
+        <PoiForm {categories} />
+        <PoiList {pois} />
 	</div>
 </div>

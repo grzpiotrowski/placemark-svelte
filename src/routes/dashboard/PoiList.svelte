@@ -11,7 +11,7 @@
       console.log("Error trying to delete POI: " + id);
     }
   }
-  
+
 </script>
 
 {#each pois as poi}
