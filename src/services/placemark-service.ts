@@ -102,5 +102,14 @@ export const placemarkService = {
 			return;
 		}
 	},
+
+	async updatePoi(id: string, poiData: any): Promise<void> {
+		try {
+			await axios.patch(`${this.baseUrl}/api/pois/${id}`, poiData);
+		} catch (error) {
+			console.error(`Error deleting POI with id ${id}`, error);
+			return;
+		}
+	},
 	
 };

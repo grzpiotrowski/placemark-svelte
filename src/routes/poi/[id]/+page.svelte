@@ -3,40 +3,95 @@
 	import MainNavigator from "$lib/MainNavigator.svelte";
     import type { Poi, Category} from "../../../services/placemark-types"
     export let categories: Category[];
+    import { placemarkService } from "../../../services/placemark-service";
     import type { PageData } from "./$types";
 	export let data: PageData;
 
     const { poi } = data;
+
+    let isEditing = false;
+
+    async function saveData() {
+        const poiData = {
+            name: poi.name,
+            description: poi.description,
+            latitude: poi.latitude,
+            longitude: poi.longitude
+		};
+        await placemarkService.updatePoi(poi._id, poiData);
+        isEditing = false;
+    }
+
 </script>
 
 <Header>
 	<MainNavigator />
 </Header>
   
-  <section class="section">
-    <div class="title">
-      {poi.name}
-    </div>
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>Category:</td>
-          <td>{poi.category.name}</td>
-        </tr>
-        <tr>
-          <td>Description:</td>
-          <td>{poi.description}</td>
-        </tr>
-        <tr>
-          <td>Latitude:</td>
-          <td>{poi.latitude}</td>
-        </tr>
-        <tr>
-          <td>Longitude:</td>
-          <td>{poi.longitude}</td>
-        </tr>
-      </tbody>
-    </table>
-    <a class="button" href={`/poi/edit/${poi._id}`}> Edit POI </a>
-  </section>
-  
+<section class="section">
+	{#if isEditing}
+		<div class="title">
+			<input type="text" bind:value={poi.name} />
+		</div>
+		<figure class="image is-3by1">
+			{#if poi.img}
+				<input type="text" bind:value={poi.img} />
+			{:else}
+				<img src="../../images/poi-placeholder.jpg" alt="Placeholder Image" />
+			{/if}
+		</figure>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>Category:</td>
+					<td><input type="text" bind:value={poi.category.name} /></td>
+				</tr>
+				<tr>
+					<td>Description:</td>
+					<td><input type="text" bind:value={poi.description} /></td>
+				</tr>
+				<tr>
+					<td>Latitude:</td>
+					<td><input type="text" bind:value={poi.latitude} /></td>
+				</tr>
+				<tr>
+					<td>Longitude:</td>
+					<td><input type="text" bind:value={poi.longitude} /></td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="button" on:click={saveData}>Save Changes</button>
+	{:else}
+		<div class="title">
+			{poi.name}
+		</div>
+		<figure class="image is-3by1">
+			{#if poi.img}
+				<img src="{poi.img}" alt="POI Image" />
+			{:else}
+				<img src="../../images/poi-placeholder.jpg" alt="Placeholder Image" />
+			{/if}
+		</figure>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>Category:</td>
+					<td>{poi.category.name}</td>
+				</tr>
+				<tr>
+					<td>Description:</td>
+					<td>{poi.description}</td>
+				</tr>
+				<tr>
+					<td>Latitude:</td>
+					<td>{poi.latitude}</td>
+				</tr>
+				<tr>
+					<td>Longitude:</td>
+					<td>{poi.longitude}</td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="button" on:click={() => isEditing = true}>Edit POI</button>
+	{/if}
+</section>
