@@ -1,6 +1,6 @@
 import axios from "axios";
 import { loggedInUser } from "../stores";
-import type { Poi } from "./placemark-types";
+import type { Poi, Category } from "./placemark-types";
 
 export const placemarkService = {
 	baseUrl: "http://localhost:3000",
@@ -65,6 +65,15 @@ export const placemarkService = {
 		}
 	},
 
+	async getAllCategories(): Promise<Category[]> {
+		try {
+			const response = await axios.get(this.baseUrl + "/api/categories");
+			return response.data;
+		} catch (error) {
+			return [];
+		}
+	},
+
 	async getPois(): Promise<Poi[]> {
 		try {
 			const response = await axios.get(this.baseUrl + "/api/pois");
@@ -74,4 +83,50 @@ export const placemarkService = {
 		}
 	},
 
+	async getPoiById(id: string): Promise<Poi> {
+		try {
+			const response = await axios.get(this.baseUrl + "/api/pois/" + id);
+			console.log(response);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+			throw error;
+		}
+	},
+
+	async getPoisByUser(userId: string): Promise<Poi[]> {
+		try {
+			const response = await axios.get(this.baseUrl + "/api/users/" + userId + "/pois");
+			return response.data;
+		} catch (error) {
+			return [];
+		}
+	},
+
+	async createPoi(poi: any) {
+		try {
+		await axios.post(`${this.baseUrl}/api/pois`, poi);
+		} catch (error) {
+			console.error("Error creating a POI", error);
+		}
+	  },
+
+	async deletePoi(id: string): Promise<void> {
+		try {
+			await axios.delete(`${this.baseUrl}/api/pois/${id}`);
+		} catch (error) {
+			console.error(`Error deleting POI with id ${id}`, error);
+			return;
+		}
+	},
+
+	async updatePoi(id: string, poiData: any): Promise<void> {
+		try {
+			await axios.patch(`${this.baseUrl}/api/pois/${id}`, poiData);
+		} catch (error) {
+			console.error(`Error deleting POI with id ${id}`, error);
+			return;
+		}
+	},
+	
 };

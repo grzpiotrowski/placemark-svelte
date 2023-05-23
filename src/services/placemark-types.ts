@@ -20,6 +20,7 @@ export interface Category {
 export interface Poi {
 	name: string;
 	category: Category;
+	img: string;
     description: string;
     latitude: number;
     longitude: number;
