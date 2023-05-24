@@ -4,7 +4,6 @@
 	import LeafletMap from "$lib/LeafletMap.svelte";
 	import type { PageData } from "./$types";
 	export let data: PageData;
-	export const ssr = false;
 </script>
 
 <Header>

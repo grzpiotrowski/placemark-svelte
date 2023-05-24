@@ -15,7 +15,7 @@ export const placemarkService = {
 					token: response.data.token,
 					_id: response.data.id
 				});
-				localStorage.placemark = JSON.stringify({ email: email, token: response.data.token });
+				localStorage.placemark = JSON.stringify({ email: email, token: response.data.token, _id: response.data.id });
 				return true;
 			}
 			return false;

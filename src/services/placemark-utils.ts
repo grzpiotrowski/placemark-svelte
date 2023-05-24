@@ -53,20 +53,16 @@ export function generateByCategory(poiList: Poi[]): ChartData {
 		]
 	};
 
-	// Create a map to store the count of POIs by category
 	const categoryCount: { [key: string]: number } = {};
 
 	poiList.forEach((poi) => {
 		if (!categoryCount[poi.category.name]) {
-			// If the category is not in the map yet, add it with count 1
 			categoryCount[poi.category.name] = 1;
 		} else {
-			// If the category is already in the map, increment the count
 			categoryCount[poi.category.name]++;
 		}
 	});
 
-	// Convert the category map to arrays for your chart data
 	for (const category in categoryCount) {
 		totalByCategory.labels.push(category);
 		totalByCategory.datasets[0].values.push(categoryCount[category]);

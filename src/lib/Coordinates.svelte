@@ -3,7 +3,7 @@
 	export let longitude = 0.0;
 </script>
 
-<div class="box field is-horizontal">
+<div class="field is-horizontal">
 	<div class="field-label is-normal">
 		<label for="lng" class="label">Lat</label>
 	</div>
