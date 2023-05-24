@@ -29,24 +29,34 @@
     }
 </script>
 
-<form on:submit|preventDefault={addPoi}>
-    <div class="field">
-		<label class="label" for="name">Name</label>
-		<input bind:value={name} class="input" id="name" name="name" type="text"/>
-	</div>
-	<div class="field">
-		<label class="label" for="description">Description</label>
-		<input bind:value={description} class="input" id="description" name="description" type="text"/>
-	</div>
-	<div class="field">
-		<div class="select">
-            <select bind:value={selectedCategoryName}>
+<form on:submit|preventDefault={addPoi} class="box">
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label" for="name">Name</label>
+        </div>
+        <input bind:value={name} class="input" id="name" name="name" type="text"/>
+    </div>
+    
+    <div class="field is-horizontal is-pulled-left">
+        <div class="field-label is-normal">
+            <label for="category" class="label">Category</label>
+        </div>
+        <div class="select">
+            <select bind:value={selectedCategoryName} id="category" name="category">
                 {#each categories as category}
                     <option>{category.name}</option>
                 {/each}
             </select>
-		</div>
+        </div>
+    </div>
+
+	<div class="field is-horizontal">
+        <div class="field-label is-normal">
+		    <label class="label" for="description">Description</label>
+        </div>
+		<input bind:value={description} class="input" id="description" name="description" type="text"/>
 	</div>
+
 	<Coordinates bind:latitude bind:longitude />
 	<div class="field">
 		<div class="control">

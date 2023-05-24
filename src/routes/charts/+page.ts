@@ -8,7 +8,7 @@ export const load = async ({ params }) => {
 	const pois = await placemarkService.getPois();
 
 	return {
-		pois: await placemarkService.getPois(),
+		pois: pois,
 		byCategory: generateByCategory(pois)
 	};
 };
