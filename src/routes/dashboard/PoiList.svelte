@@ -28,8 +28,8 @@
   </header>
   <div class="card-image">
     <figure class="image is-3by1">
-      {#if poi.img}
-        <img src="{poi.img}" alt="POI Image">
+      {#if poi?.img}
+        <img src="{poi?.img}" alt="POI Image">
       {:else}
         <img src="images/poi-placeholder.jpg" alt="Placeholder Image">
       {/if}
@@ -41,10 +41,10 @@
     </div>
   </div>
   <footer class="card-footer">
-    <a href={`/poi/${poi._id}`} class="button is-medium is-fullwidth">
+    <a href={`/poi/${poi?._id}`} class="button is-medium is-fullwidth">
       <i class="fas fa-folder-open"></i>
     </a>
-    <button class="button is-medium is-fullwidth" on:click={() => deletePoi(poi._id)}>
+    <button class="button is-medium is-fullwidth" on:click={() => deletePoi(poi?._id)}>
       <i class="fas fa-trash-alt" style="color:red"></i>
     </button>
   </footer>

@@ -27,13 +27,13 @@
 
     let fileInput: HTMLInputElement;
     let files: FileList;
-    let avatar: string;
+    let imageString: string;
 
     function getBase64(image: File) {
         const reader = new FileReader();
         reader.readAsDataURL(image);
         reader.onload = e => {
-            avatar = e.target!.result as string;
+            imageString = e.target!.result as string;
             placemarkService.uploadImage(e.target!.result as string, id);
         };
     };
@@ -121,3 +121,10 @@
 		<button class="button" on:click={() => isEditing = true}>Edit POI</button>
 	{/if}
 </section>
+
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
