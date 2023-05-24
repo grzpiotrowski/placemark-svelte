@@ -11,7 +11,36 @@ export function getMarkerLayer(pois: Poi[]): MarkerLayer {
 			location: new LatLng(poi.latitude, poi.longitude)
 		});
 	});
-	return { name: "pois", markerSpecs: markerSpecs };
+	return { name: "poi", markerSpecs: markerSpecs };
+}
+
+export function getMarkerLayers(pois: Poi[]): MarkerLayer[] {
+	const layers: Record<string, MarkerSpec[]> = {};
+  
+	pois.forEach((poi) => {
+	  if (!layers[poi.category.name]) {
+		layers[poi.category.name] = [];
+	  }
+	  
+	  layers[poi.category.name].push({
+		id: poi._id,
+		name: poi.name,
+		location: new LatLng(poi.latitude, poi.longitude),
+	  });
+	});
+  
+	const layerKeys = Object.keys(layers);
+
+	const markerLayers = layerKeys.map((category) => {
+		const markerLayer = {
+			name: category,
+			markerSpecs: layers[category]
+		};
+
+		return markerLayer;
+	});
+
+	return markerLayers;
 }
 
 export function generateByCategory(poiList: Poi[]): ChartData {
@@ -44,4 +73,4 @@ export function generateByCategory(poiList: Poi[]): ChartData {
 	}
 
 	return totalByCategory;
-  }
+}

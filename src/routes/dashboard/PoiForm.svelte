@@ -13,7 +13,7 @@
 	let latitude = 52.160858;
 	let longitude = -7.15242;
 
-	let selectedCategoryName = categories[0].name;
+	let selectedCategoryName = categories[0]?.name;
 
     async function addPoi() {
         const selectedCategory = categories.find(c => c.name === selectedCategoryName);

@@ -13,7 +13,8 @@
 
 <div class="columns">
 	<div class="column box has-text-centered">
-		<h1 class="title is-4">Places by Category</h1>
-		<Chart data={data.byCategory} type="bar" />
+		<h1 class="title is-4">Places by Category (All Users)</h1>
+		<Chart bind:data={data.byCategory} type='pie' />
+		<Chart bind:data={data.byCategory} type='bar' />
 	</div>
 </div>
