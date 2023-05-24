@@ -3,7 +3,8 @@ import { loggedInUser } from "../stores";
 import type { Poi, Category } from "./placemark-types";
 
 export const placemarkService = {
-	baseUrl: "https://grzegorz-placemark.glitch.me/",
+	baseUrl: "https://grzegorz-placemark.glitch.me",
+	//baseUrl: "http://localhost:3000",
 
 	async login(email: string, password: string): Promise<boolean> {
 		try {
