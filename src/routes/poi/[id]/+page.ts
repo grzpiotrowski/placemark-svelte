@@ -1,6 +1,7 @@
 import { placemarkService } from "../../../services/placemark-service";
 import { loggedInUser } from "../../../stores";
 import { get } from "svelte/store";
+export const ssr = false;
 
 export const load = async ({ params }) => {
   placemarkService.checkPageRefresh();
