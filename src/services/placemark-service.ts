@@ -128,5 +128,17 @@ export const placemarkService = {
 			return;
 		}
 	},
+
+	async uploadImage(imgBase64: string, id: string): Promise<void> {
+		const formData = new FormData();
+		formData.append("imagefile", imgBase64);
+		
+		await axios.post(`${this.baseUrl}/api/pois/${id}/images`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			},
+		});
+		
+    },
 	
 };

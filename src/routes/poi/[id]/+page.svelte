@@ -7,6 +7,7 @@
 	export let data: PageData;
 
     const poi = data.poi;
+    const id = poi._id;
     const categories = data.categories;
 
     let isEditing = false;
@@ -24,6 +25,19 @@
         isEditing = false;
     }
 
+    let fileInput: HTMLInputElement;
+    let files: FileList;
+    let avatar: string;
+
+    function getBase64(image: File) {
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = e => {
+            avatar = e.target!.result as string;
+            placemarkService.uploadImage(e.target!.result as string, id);
+        };
+    };
+
 </script>
 
 <Header>
@@ -35,6 +49,10 @@
 		<div class="title">
 			<input type="text" bind:value={poi.name} />
 		</div>
+        <div>
+            <input class="hidden" id="file-to-upload" type="file" accept=".png,.jpg" bind:files bind:this={fileInput} on:change={() => getBase64(files[0])}/>
+            <button class="upload-btn" on:click={ () => fileInput.click() }>Upload</button>
+        </div>
 		<figure class="image is-3by1">
 			{#if poi.img}
 				<input type="text" bind:value={poi.img} />
