@@ -140,5 +140,14 @@ export const placemarkService = {
 		});
 		
     },
+
+	async deleteImage(id: string): Promise<void> {
+		try {
+			await axios.delete(`${this.baseUrl}/api/pois/${id}/images`);
+		} catch (error) {
+			console.error(`Error deleting Image on POI with id ${id}`, error);
+			return;
+		}
+	}
 	
 };

@@ -23,7 +23,7 @@
 		};
         await placemarkService.updatePoi(poi._id, poiData);
         isEditing = false;
-    }
+    };
 
     let fileInput: HTMLInputElement;
     let files: FileList;
@@ -37,6 +37,10 @@
             placemarkService.uploadImage(e.target!.result as string, id);
         };
     };
+
+    async function deleteImage() {
+        await placemarkService.deleteImage(poi._id);
+    }
 
 </script>
 
@@ -52,10 +56,11 @@
         <div>
             <input class="hidden" id="file-to-upload" type="file" accept=".png,.jpg" bind:files bind:this={fileInput} on:change={() => getBase64(files[0])}/>
             <button class="upload-btn" on:click={ () => fileInput.click() }>Upload</button>
+            <button class="delete-btn" on:click={ () => deleteImage() }>Delete</button>
         </div>
 		<figure class="image is-3by1">
 			{#if poi.img}
-				<input type="text" bind:value={poi.img} />
+            <img src={poi.img} alt="POI Image" />
 			{:else}
 				<img src="../../images/poi-placeholder.jpg" alt="Placeholder Image" />
 			{/if}
